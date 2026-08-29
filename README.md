@@ -10,7 +10,7 @@
 ## 🗒 Project Evolution & Roadmap
 This repository hosts a multi-phase corporate credit platform that evolved from an advanced data science research pilot into a production-tier, model-agnostic intelligent orchestration engine:
 
-*   **Phase I (Core Capstone Notebook):** Built a high-performance, leak-proof predictive framework using tabular machine learning to isolate high-risk credit accounts.
+*   **Phase I (Core Capstone Notebook):** Built a high-performance, leak-proof predictive framework using tabular machine learning to isolate high-risk credit accounts. (Link: https://github.com/kumes121/UCB-ML-AI-Capstone-Loan-Default-Risk-Prediction )
 *   **Phase II (Agentic Platform Upgrade):** Wrapped the static predictive weights into an active microservices network utilizing an autonomous **LangGraph** workflow engine, a **FastAPI** validation tier, and a **Gradio** workbench interface.
 
 ---
