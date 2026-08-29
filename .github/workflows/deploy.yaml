@@ -1,0 +1,59 @@
+name: Build and Push Underwriting Microservice to Amazon ECR
+
+on:
+  push:
+    branches:
+      - main  # Triggers automation instantly whenever code is merged to main
+
+permissions:
+  id-token: write   # Required for secure OIDC authentication mapping
+  contents: read    # Required to checkout the repository code layer
+
+jobs:
+  ci_cd_pipeline:
+    name: Build, Secure, and Push Production Artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      # =====================================================================
+      # STEP 1: CHECKOUT APPLICATION SOURCE LAYERS
+      # =====================================================================
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      # =====================================================================
+      # STEP 2: CONFIGURE AWS CREDENTIAL BOUNDARIES
+      # =====================================================================
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2  # Your default capstone target region
+
+      # =====================================================================
+      # STEP 3: AUTHENTICATE SECURELY WITH AMAZON ECR
+      # =====================================================================
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # =====================================================================
+      # STEP 4: BUILD, TAG, AND TRANSMIT IMMUTABLE CONTAINER IMAGE
+      # =====================================================================
+      - name: Build, Tag, and Push OpenShift-Compliant Image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          # 💡 Replace this with your exact physical Amazon ECR repository name
+          ECR_REPOSITORY: ai-credit-risk-orchestration
+          IMAGE_TAG: latest
+        run: |
+          echo "[CI/CD INFO] Starting multi-stage container build process..."
+          
+          # Build your lean runner image (S3/Bedrock features decouples .joblib dependencies)
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          
+          echo "[CI/CD INFO] Pushing immutable image footprint to AWS ECR..."
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          
+          echo "[CI/CD SUCCESS] Application container is live in ECR and ready for cluster deployment!"

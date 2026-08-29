@@ -1,0 +1,40 @@
+# =====================================================================
+# CORE AI WORKFLOW & AGENTIC ORCHESTRATION LAYER
+# =====================================================================
+langgraph
+langchain
+langchain-core
+langchain-community
+langchain-mcp-adapters
+langchain-aws            # Ready for native Amazon Bedrock production routing
+langchain-ollama         # Modern driver layer for local model orchestration
+# =====================================================================
+# ENTERPRISE INGESTION GATEWAY & GRADIO WORKBENCH INTERFACE
+# =====================================================================
+fastapi
+uvicorn
+pydantic
+gradio
+jinja2
+
+# =====================================================================
+# DATA SCIENCE CORE, MACHINE LEARNING, & EXPLAINABILITY
+# =====================================================================
+xgboost==2.1.1
+scikit-learn==1.5.1
+pandas==2.2.2
+numpy==1.26.4
+joblib==1.4.2
+shap==0.46.0                        
+plotly>=5.20.0
+
+# =====================================================================
+# OBSERVABILITY PLATFORM LOGGING & TELEMETRY DRIVERS
+# =====================================================================
+langfuse>=4.0.0                    # High-level system cost and trace analytics engine
+psycopg-pool==3.2.2                 # Advanced connection pooling for production database state scaling
+
+# =====================================================================
+# MLOPS EXTRACTION UTILITIES
+# =====================================================================
+nbformat==5.10.4                    # Required to safely parse and read the .ipynb JSON schema

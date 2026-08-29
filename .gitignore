@@ -1,0 +1,18 @@
+# Local Private Credentials & Cloud Access Tokens
+.env
+*.env
+
+# Isolated Development Virtual Environments
+.venv/
+venv/
+ENV/
+
+# Python Compiled Execution Caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Large Machine Learning Models & Analytical Checkpoints
+models/xgboost_champion.joblib
+.ipynb_checkpoints/
